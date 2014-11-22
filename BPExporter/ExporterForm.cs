@@ -416,7 +416,12 @@ namespace BPExporter
 
         private void ExporterForm_Load(object sender, EventArgs e)
         {
-            revLabel.Text = String.Format("Version: {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString()); 
+            string gitVersion = String.Empty;
+            using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("BPExporter." + "gitrevision.txt"))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                revLabel.Text = reader.ReadToEnd();
+            }
 
             ExporterDB = new DB(Settings.DatabasePath);
             FillProjectsCache(ExporterDB);

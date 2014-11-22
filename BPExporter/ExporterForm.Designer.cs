@@ -65,7 +65,6 @@
             this.checkAll = new System.Windows.Forms.CheckBox();
             this.refreshBtn = new System.Windows.Forms.Button();
             this.exportByCountry = new System.Windows.Forms.CheckBox();
-            this.revLabel = new System.Windows.Forms.Label();
             this.hashSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -107,6 +106,8 @@
             this.regionCombo = new BPExporter.CheckedComboBox();
             this.ispCombo = new BPExporter.CheckedComboBox();
             this.countryCombo = new BPExporter.CheckedComboBox();
+            this.revLabel = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.hitsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filesView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectsTree)).BeginInit();
@@ -502,19 +503,6 @@
             this.exportByCountry.TabIndex = 30;
             this.exportByCountry.Text = "Export By Country";
             this.exportByCountry.UseVisualStyleBackColor = true;
-            // 
-            // revLabel
-            // 
-            this.revLabel.AccessibleName = "revLabel";
-            this.revLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.revLabel.AutoSize = true;
-            this.revLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.revLabel.Location = new System.Drawing.Point(198, 29);
-            this.revLabel.Name = "revLabel";
-            this.revLabel.Size = new System.Drawing.Size(0, 13);
-            this.revLabel.TabIndex = 31;
-            this.revLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // hashSearch
             // 
@@ -923,11 +911,31 @@
             this.countryCombo.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.countryCombo_ItemCheck);
             this.countryCombo.DropDownClosed += new System.EventHandler(this.countryCombo_DropDownClosed);
             // 
+            // revLabel
+            // 
+            this.revLabel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.revLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.revLabel.Location = new System.Drawing.Point(301, 23);
+            this.revLabel.Name = "revLabel";
+            this.revLabel.Size = new System.Drawing.Size(227, 21);
+            this.revLabel.TabIndex = 69;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(201, 26);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 15);
+            this.label12.TabIndex = 70;
+            this.label12.Text = "Version:";
+            // 
             // ExporterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1019, 759);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.revLabel);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.TimeZone);
             this.Controls.Add(this.regionCombo);
@@ -959,7 +967,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.hashSearch);
-            this.Controls.Add(this.revLabel);
             this.Controls.Add(this.exportByCountry);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.checkAll);
@@ -1023,7 +1030,6 @@
         private System.Windows.Forms.CheckBox checkAll;
         private System.Windows.Forms.Button refreshBtn;
         private System.Windows.Forms.CheckBox exportByCountry;
-        private System.Windows.Forms.Label revLabel;
         private BrightIdeasSoftware.OLVColumn columnRegion;
         private BrightIdeasSoftware.OLVColumn columnHashFiles;
         private System.Windows.Forms.TextBox hashSearch;
@@ -1073,6 +1079,8 @@
         private System.Windows.Forms.ComboBox TimeZone;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox revLabel;
+        private System.Windows.Forms.Label label12;
     }
 }
 
