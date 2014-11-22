@@ -15,7 +15,7 @@
 [assembly: System.Reflection.AssemblyCopyright("Copyright © 2009")]
 [assembly: System.Runtime.InteropServices.ComVisible(false)]
 [assembly: System.Runtime.InteropServices.Guid("88812638-9547-4480-9bf4-4fe25103b35c")]
-[assembly: System.Reflection.AssemblyVersion("1.0.0.2311")]
-[assembly: System.Reflection.AssemblyFileVersion("1.0.0.2311")]
+[assembly: System.Reflection.AssemblyVersion("1.0.0.21")]
+[assembly: System.Reflection.AssemblyFileVersion("1.0.0.21")]
 
 

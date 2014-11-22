@@ -10,7 +10,7 @@ using System.Data.SQLite;
 namespace BPExporter
 {
     public class Project
-    {
+    {  
         private long id;
         private string name;
         private DateTime createDate;
