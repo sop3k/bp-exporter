@@ -1,0 +1,26 @@
+IP Adresse=Hit.IP
+Datum=({1:dd.MM.yyyy}, Hit.Date)
+Uhrzeit=({1:HH:mm:ss}, Hit.Time)
+Zone=
+Laufende Nummer=({0})
+Client=Hit.Client
+Dateiname=Hit.Filename
+
+Dateihash=Hit.Hash
+BenKenn=({1}-{0:0000}, Hit.BennKenn)
+GUID=Hit.GUID
+
+
+
+
+
+Port=Hit.Port
+IP-Protokolltyp=TCP
+Filename=({1}_{2}_{3}, Hit.Isp, ProjectName, Now)
+
+Format[Datum]=Short Date
+Format[Uhrzeit]=@
+Format[IP Adresse]=@
+Format[Laufende Nummer]=Fixed
+Format[Zone]=Fixed
+Filename=({1}_{2}_{3}__{4}, Hit.Isp, ProjectName, Now, AKZ)

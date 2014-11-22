@@ -1,0 +1,31 @@
+﻿Format=XLS
+Title=(Auskunftsersuchen_KUP_11{1}, Hit.BennKenn)
+Nummer;=({0})
+Künstler/Autor;=Empty
+Titel;=Empty
+IP-Adresse;=Hit.IP
+IP-Port=Hit.Port
+IP-Protokolltyp=TCP
+Datum;=({1:dd.MM.yyyy}, Hit.Date)
+Uhrzeit;=({1:HH:mm:ss}, Hit.Time)
+Zeitzone;=CET
+Geschäftszeichen;=({1} {0:0000}, Hit.BennKenn)
+
+
+
+Dateiname=Hit.Filename
+Dateihash=Hit.Hash
+GUID=Hit.GUID
+Client=Hit.Client
+Filename=({1}_{2}_{3}__{4}, Hit.Isp, ProjectName, Now, AKZ)
+
+
+
+Format[Datum;]=@
+Format[IP-Adresse;]=@
+Format[Uhrzeit;]=@
+Format[Nummer;]=Fixed
+Format[Künstler/Autor;]=@
+Format[Titel;]=@
+Format[Zone;]=@
+Format[Geschäftszeichen;]=@

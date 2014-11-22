@@ -1,0 +1,21 @@
+Host IP address=Hit.IP
+Hit Date(UTC)=({1:yyyy.MM.dd} {2:hh:mm tt}, Hit.Date.ToUniversalTime, Hit.Time.ToUniversalTime)
+Related Title=Hit.Filename
+State Name=Hit.Region
+State=Hit.ShortRegion
+ISP=Hit.Isp
+FileHash=Hit.Hash
+City=Hit.City
+
+
+Lfd. Nummer=({0})
+AKN=({1}-{0:0000}, Hit.BennKenn)
+GUIG=Hit.GUID
+IP-Port=Hit.Port
+IP-Protokolltyp=TCP
+Client=Hit.Client
+Time zone;=UTC
+
+AutoFilter=Yes
+
+Filename=({1}_{2}_{3}__{4}, Hit.Isp, ProjectName, Now, AKZ)

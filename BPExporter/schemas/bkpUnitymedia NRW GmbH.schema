@@ -1,0 +1,9 @@
+bstKzRecord=("{1}-{0:0000}", Hit.BennKenn)
+ipv4=("{1}", Hit.IP)
+ipv6=""
+zsAuskunftDatum=("{1:dd.MM.yyyy}", Hit.Date)
+zsAuskunftZeit=("{1:HH:mm:ss}", Hit.Time)
+anlassInhalt=""
+anlassInhalthash=("{1}", Hit.Hash)
+OutputFormat=CSV
+Delimiter=|

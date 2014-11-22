@@ -1,0 +1,16 @@
+OutputFormat=CSV
+Delimiter=|
+bstKzRecord=("{1:00000}-{0:0}", Hit.BennKenn)
+ipv4=("{1}", Hit.IP)
+ipv6=("{1}", Empty)
+zsAuskunftDatum=("{1:dd.MM.yyyy}", Hit.Date)
+zsAuskunftZeit=("{1:HH:mm:ss}", Hit.Time)
+anlassInhalt=(""{1}, Empty)
+anlassInhalthash=("{1}", Hit.Hash)
+Downloaded=Hit.Downloaded
+Piece=Hit.PieceNumber
+Block=Hit.PieceNumer
+PieceHash=Hit.PieceHash
+BlockHash=Hit.BlockHash
+PercentDownloaded=Hit.PercentDownloaded
+Filename=({1}_{2}_{3}__{4}, Hit.Isp, ProjectName, Now, AKZ)

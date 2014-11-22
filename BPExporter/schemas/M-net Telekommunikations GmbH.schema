@@ -1,0 +1,15 @@
+Format=XLS
+IP Adresse=Hit.IP
+Datum=({1:dd.MM.yyyy}, Hit.Date)
+Uhrzeit=({1:HH:mm:ss}, Hit.Time)
+Zone=0
+Laufende Nummer=({0})
+BenKenn=({1}-{0:0000}, Hit.BennKenn)
+
+
+
+Dateiname=Hit.Filename
+Dateihash=Hit.Hash
+GUID=Hit.GUID
+Client=Hit.Client
+Filename=({1}_{2}_{3}__{4}, Hit.Isp, ProjectName, Now, AKZ)

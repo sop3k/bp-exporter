@@ -1,0 +1,18 @@
+Laufende Nummer:=({0})
+IP Adresse:=Hit.IP
+Datum Uhrzeit:=({1:dd.MM.yyyy} {2:HH:mm:ss}, Hit.Date, Hit.Time)
+Zeitzone:=CET
+Client=Hit.Client
+Dateiname=Hit.Filename
+
+Dateihash=Hit.Hash
+BenKenn=({1}-{0:0000}, Hit.BennKenn)
+GUID=Hit.GUID
+
+
+
+
+
+Port=Hit.Port
+IP-Protokolltyp=TCP
+Filename=({1}_{2}_{3}__{4}, Hit.Isp, ProjectName, Now, AKZ)
