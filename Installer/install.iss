@@ -1,5 +1,9 @@
 ; -- exporter.iss --
 
+#ifndef Revision
+  #error Called outside build script!
+#endif
+
 #define ExporterGetSuffix() GetDateTimeString('yyyy_mm_dd','','');
 
 [Setup]
@@ -15,7 +19,7 @@ UninstallDisplayIcon={app}\BPExporter.exe
 OutputDir=bin
 Compression=lzma
 SolidCompression=yes
-OutputBaseFilename=BPExporterSetup_{#ExporterGetSuffix()}
+OutputBaseFilename=BPExporterSetup_{#ExporterGetSuffix()}_{#Revision}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"

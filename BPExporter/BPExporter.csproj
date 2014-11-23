@@ -273,9 +273,12 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>call "$(ProjectDir)\gitcheck.cmd"
-"C:\Program Files (x86)\Git\bin\git.exe" rev-parse --short HEAD &gt; "$(ProjectDir)\gitrevision.txt"
+    <PreBuildEvent>"C:\Program Files (x86)\Git\bin\git.exe" rev-parse --short HEAD &gt; "$(ProjectDir)\gitrevision.txt"
 if exist "$(TargetPath).locked" del "$(TargetPath).locked" 
 if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

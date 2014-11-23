@@ -1,5 +1,9 @@
 ; -- exporter.iss --
 
+#ifndef Revision
+  #error Called outside build script!
+#endif
+
 #define ExporterGetSuffix() GetDateTimeString('yyyy_mm_dd','','');
 
 [Setup]
@@ -15,7 +19,7 @@ UninstallDisplayIcon={app}\BPExporter.exe
 OutputDir=bin
 Compression=lzma
 SolidCompression=yes
-OutputBaseFilename=BPExporterSetup_x64_{#ExporterGetSuffix()}
+OutputBaseFilename=BPExporterSetup_x64_{#ExporterGetSuffix}_{#Revision}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -26,24 +30,24 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 
 [Files]
-Source: "..\..\trunk\BPExporter\bin\x64\Release\BPExporter.exe";                  DestDir: "{app}" 
-Source: "..\..\trunk\BPExporter\bin\x64\Release\ObjectListView.dll";              DestDir: "{app}"
-Source: "..\..\trunk\BPExporter\bin\Release\GeoIPISP.dat";                        DestDir: "{app}"
-Source: "..\..\trunk\BPExporter\bin\Release\GeoIPCity.dat";                       DestDir: "{app}"
-Source: "..\..\trunk\BPExporter\bin\x64\Release\System.Data.SQLite.DLL";          DestDir: "{app}"
-;Source: "..\..\trunk\BPExporter\bin\x64\Release\x64\SQLite.Interop.dll";          DestDir: "{app}"
+Source: "..\BPExporter\bin\x64\Release\BPExporter.exe";                  DestDir: "{app}" 
+Source: "..\BPExporter\bin\x64\Release\ObjectListView.dll";              DestDir: "{app}"
+Source: "..\BPExporter\bin\Release\GeoIPISP.dat";                        DestDir: "{app}"
+Source: "..\BPExporter\bin\Release\GeoIPCity.dat";                       DestDir: "{app}"
+Source: "..\BPExporter\bin\x64\Release\System.Data.SQLite.DLL";          DestDir: "{app}"
+;Source: "..\trunk\BPExporter\bin\x64\Release\x64\SQLite.Interop.dll";          DestDir: "{app}"
 
-Source: "..\..\trunk\BPExporter\bin\x64\Release\NLog.config";                     DestDir: "{app}"
-Source: "..\..\trunk\BPExporter\bin\x64\Release\NLog.dll";                        DestDir: "{app}"
+Source: "..\BPExporter\bin\x64\Release\NLog.config";                     DestDir: "{app}"
+Source: "..\BPExporter\bin\x64\Release\NLog.dll";                        DestDir: "{app}"
 
 
-Source: "..\..\trunk\BPExporter\db_deploy\data.db";     DestDir: "{app}"; Flags: onlyifdoesntexist;                
+Source: "..\BPExporter\db_deploy\data.db";     DestDir: "{app}"; Flags: onlyifdoesntexist;                
 
 ;Office Interop, why we need this?
-Source: "..\..\trunk\BPExporter\bin\x64\Release\Microsoft.Office.Interop.Excel.dll";          DestDir: "{app}"
+Source: "..\BPExporter\bin\x64\Release\Microsoft.Office.Interop.Excel.dll";          DestDir: "{app}"
 
-Source: "..\..\trunk\BPExporter\bin\Release\schemas\*.*"; Excludes: ".svn"; DestDir: "{app}\schemas"; Flags: onlyifdoesntexist;
-Source: "..\..\trunk\BPExporter\bin\Release\tables\*.*"; Excludes: ".svn"; DestDir: "{app}\tables"; Flags: onlyifdoesntexist;
+Source: "..\BPExporter\bin\Release\schemas\*.*"; Excludes: ".svn"; DestDir: "{app}\schemas"; Flags: onlyifdoesntexist;
+Source: "..\BPExporter\bin\Release\tables\*.*"; Excludes: ".svn"; DestDir: "{app}\tables"; Flags: onlyifdoesntexist;
 
 
 Source: ".\O2003PIA.MSI";                       DestDir: {tmp}; Flags: deleteafterinstall
