@@ -7,4 +7,5 @@ if "%OUTPUT%" == "" (goto ok) else (goto fail)
 exit 0
 :fail
 echo "GIT DIRTY. PLEASE COMMIT"
+echo "%OUTPUT%"
 exit 1
