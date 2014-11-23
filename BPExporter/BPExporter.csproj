@@ -269,11 +269,12 @@
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="2012/1/19" BuildVersion_BuildVersioningStyle="None.MonthAndDayStamp.Increment.None" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_BuildVersioningStyle="None.MonthAndDayStamp.Increment.None" BuildVersion_StartDate="2012/1/19" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PreBuildEvent>"C:\Program Files (x86)\Git\bin\git.exe" rev-parse --short HEAD &gt; "$(ProjectDir)\gitrevision.txt"
+    <PreBuildEvent>call "$(ProjectDir)\gitcheck.cmd"
+"C:\Program Files (x86)\Git\bin\git.exe" rev-parse --short HEAD &gt; "$(ProjectDir)\gitrevision.txt"
 if exist "$(TargetPath).locked" del "$(TargetPath).locked" 
 if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
   </PropertyGroup>
