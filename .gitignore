@@ -229,3 +229,5 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 BPExporter/gitrevision.txt
+BPExporter/Properties/AssemblyInfo.cs
+BPExporter/version.txt
