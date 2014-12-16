@@ -103,11 +103,11 @@
             this.TimeZone = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.revLabel = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.regionCombo = new BPExporter.CheckedComboBox();
             this.ispCombo = new BPExporter.CheckedComboBox();
             this.countryCombo = new BPExporter.CheckedComboBox();
-            this.revLabel = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.hitsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filesView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectsTree)).BeginInit();
@@ -764,7 +764,7 @@
             // activeDB
             // 
             this.activeDB.AutoSize = true;
-            this.activeDB.Location = new System.Drawing.Point(342, 16);
+            this.activeDB.Location = new System.Drawing.Point(302, 5);
             this.activeDB.Name = "activeDB";
             this.activeDB.Size = new System.Drawing.Size(0, 15);
             this.activeDB.TabIndex = 44;
@@ -857,6 +857,24 @@
             this.label6.TabIndex = 68;
             this.label6.Text = "TZ:";
             // 
+            // revLabel
+            // 
+            this.revLabel.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.revLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.revLabel.Location = new System.Drawing.Point(301, 23);
+            this.revLabel.Name = "revLabel";
+            this.revLabel.Size = new System.Drawing.Size(227, 21);
+            this.revLabel.TabIndex = 69;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(201, 26);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(51, 15);
+            this.label12.TabIndex = 70;
+            this.label12.Text = "Version:";
+            // 
             // regionCombo
             // 
             this.regionCombo.BackColor = System.Drawing.SystemColors.Info;
@@ -910,24 +928,6 @@
             this.countryCombo.ValueSeparator = ", ";
             this.countryCombo.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.countryCombo_ItemCheck);
             this.countryCombo.DropDownClosed += new System.EventHandler(this.countryCombo_DropDownClosed);
-            // 
-            // revLabel
-            // 
-            this.revLabel.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.revLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.revLabel.Location = new System.Drawing.Point(301, 23);
-            this.revLabel.Name = "revLabel";
-            this.revLabel.Size = new System.Drawing.Size(227, 21);
-            this.revLabel.TabIndex = 69;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(201, 26);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(51, 15);
-            this.label12.TabIndex = 70;
-            this.label12.Text = "Version:";
             // 
             // ExporterForm
             // 
