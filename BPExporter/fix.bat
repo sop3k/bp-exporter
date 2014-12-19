@@ -10,14 +10,12 @@ set INTEXTFILE=dumptmp.sql
 
 echo Opening database "%1" 
 echo .dump | sqlite3.exe "%1" > %INTEXTFILE%
-
-echo rbk_to_cmt
-rbk_to_cmt.exe %INTEXTFILE% > nul
+rbk_to_cmt.exe %INTEXTFILE%
 
 echo "Backup old database ..."
 move "%1" "%1_backup"
 
 echo "Saving fixed database ..."
-echo .read %INTEXTFILE% | sqlite3.exe "%1" > nul
+echo .read %INTEXTFILE% | sqlite3.exe "%1"
 
-del %INTEXTFILE%
+;del %INTEXTFILE%
