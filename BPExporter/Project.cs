@@ -284,7 +284,8 @@ namespace BPExporter
                 block_hash = TypeUtils.GetFromReader<String>(reader, 24);
 
                 date = reader.GetDateTime(3);
-                time = reader.GetDateTime(15).TimeOfDay;
+                time = date.TimeOfDay;
+                //time = reader.GetDateTime(15).TimeOfDay;
             }
             catch (Exception e)
             {
