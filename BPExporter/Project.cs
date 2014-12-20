@@ -9,6 +9,15 @@ using System.Data.SQLite;
 
 namespace BPExporter
 {
+    public static class SQLiteDataReaderExtensions
+    {
+        public static DateTime GetDateTimeUtc(this SQLiteDataReader reader, int col)
+        {
+            DateTime unspecified = reader.GetDateTime(col);
+            return DateTime.SpecifyKind(unspecified, DateTimeKind.Utc);
+        }
+    }  
+
     public class Project
     {  
         private long id;
@@ -253,6 +262,9 @@ namespace BPExporter
          * 
          * from {0} where exported = 0;";
         */
+
+        
+
         public Hit(SQLiteDataReader reader)
         {
             //optimized version
@@ -283,8 +295,11 @@ namespace BPExporter
                 block = TypeUtils.GetFromReader<int>(reader, 23);
                 block_hash = TypeUtils.GetFromReader<String>(reader, 24);
 
-                date = reader.GetDateTime(3);
+                var datestr = reader.GetString(3);                
+                date = DateTime.ParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss", 
+                    System.Globalization.CultureInfo.InvariantCulture);
                 time = date.TimeOfDay;
+
                 //time = reader.GetDateTime(15).TimeOfDay;
             }
             catch (Exception e)
