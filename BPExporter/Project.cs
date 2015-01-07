@@ -231,6 +231,7 @@ namespace BPExporter
         private long downloaded; //block_size
         private long piece_size;
         private long downloaded_amount;
+        private string sig;
 
         /*
         "SELECT 
@@ -259,7 +260,7 @@ namespace BPExporter
          * 22     our_port 
          * 23     block
          * 24     block_hash
-         * 
+         * 25     sig
          * from {0} where exported = 0;";
         */
 
@@ -290,10 +291,12 @@ namespace BPExporter
                 piece_hash = TypeUtils.GetFromReader<String>(reader, 20);
 
                 our_ip = TypeUtils.GetFromReader<String>(reader, 21);
-                our_port = TypeUtils.GetFromReader<int>(reader, 22);
+                our_port = (int)TypeUtils.GetFromReader<long>(reader, 22);
 
                 block = TypeUtils.GetFromReader<int>(reader, 23);
                 block_hash = TypeUtils.GetFromReader<String>(reader, 24);
+
+                sig = TypeUtils.GetFromReader<string>(reader, 25);
 
                 var datestr = reader.GetString(3);                
                 date = DateTime.ParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss", 
@@ -362,6 +365,8 @@ namespace BPExporter
 
             if (piece_hash.StartsWith("urn:btih:"))
                 piece_hash = piece_hash.Remove(0, "urn:btih:".Length);
+
+            sig = TypeUtils.GetFromReader<string>(reader, "sig");
 
             if (fixHashes) hash = hash.FixHash(url);
             
@@ -621,6 +626,12 @@ namespace BPExporter
         {
             get { return size; }
             set { size = value; }
+        }
+
+        public string Sig
+        {
+            get { return sig; }
+            set { sig = value; }
         }
 
         public String FormatedSize

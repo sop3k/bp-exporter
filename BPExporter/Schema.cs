@@ -102,6 +102,7 @@ namespace BPExporter
                 ,[size] int DEFAULT 0
                 ,[region] varchar(255) DEFAULT ''
                 ,[disconnect_time] datetime DEFAULT NULL
+                ,[sig] varchar(255) DEFAULT NULL
                 ,[downloaded] integer DEFAULT 0";
 
             if( !project.UniqueIP )
@@ -237,8 +238,8 @@ namespace BPExporter
         public void InsertNewHit(Project project, Hit hit, String FilesNo, IEnumerable<String> countries)
         {
             String sql = "INSERT INTO {0} " + 
-                "(ip, port, date, guid, url, city, country, filename, type, client, hash, isp, timezone, bennkenn, time, region, size, piece_hash, piece_number, disconnect_time, block_hash, block_number, block_size, piece_size, our_ip, our_port) VALUES" +
-                "(@ip, @port, @date, @guid, @url, @city, @country, @filename, @net_type, @client, @hash, @isp, @timezone, @bennkenn, @time, @region, @filesize, @piece_hash, @piece_number, @disconnect_time, @block_hash, @block_number, @block_size, @piece_size, @our_ip, @our_port)";
+                "(ip, port, date, guid, url, city, country, filename, type, client, hash, isp, timezone, bennkenn, time, region, size, piece_hash, piece_number, disconnect_time, block_hash, block_number, block_size, piece_size, our_ip, our_port, sig) VALUES" +
+                "(@ip, @port, @date, @guid, @url, @city, @country, @filename, @net_type, @client, @hash, @isp, @timezone, @bennkenn, @time, @region, @filesize, @piece_hash, @piece_number, @disconnect_time, @block_hash, @block_number, @block_size, @piece_size, @our_ip, @our_port, @sig)";
 
             SQLiteCommand cmd = new SQLiteCommand(String.Format(sql, project.TableName), connection);
 
@@ -284,6 +285,7 @@ namespace BPExporter
             cmd.Parameters.Add(new SQLiteParameter("block_size", hit.BlockSize));
 
             cmd.Parameters.Add(new SQLiteParameter("disconnect_time", hit.Disconnect));
+            cmd.Parameters.Add(new SQLiteParameter("sig", hit.Sig));
 
             try
             {
@@ -426,7 +428,7 @@ namespace BPExporter
         public List<Hit> GetNotExported(Project project)
         {
             List<Hit> hits = new List<Hit>();
-            String Sql = @"SELECT id, ip, port, date, guid, url, city, country, filename, type, client, hash, isp, timezone, bennkenn, time, region, size, block_size, piece_number, piece_hash, our_ip, our_port, block_number, block_hash from {0} where exported = 0;";
+            String Sql = @"SELECT id, ip, port, date, guid, url, city, country, filename, type, client, hash, isp, timezone, bennkenn, time, region, size, block_size, piece_number, piece_hash, our_ip, our_port, block_number, block_hash, sig from {0} where exported = 0;";
 
             SQLiteCommand cmd = new SQLiteCommand(String.Format(Sql, project.TableName), connection);
             cmd.Parameters.Add(new SQLiteParameter("project", project.ID));
@@ -656,6 +658,12 @@ namespace BPExporter
             try
             {
                 new SQLiteCommand(String.Format(@"ALTER TABLE {0} ADD COLUMN our_port INTEGER", project.TableName), connection).ExecuteNonQuery();
+            }
+            catch (Exception) { }
+
+            try
+            {
+                new SQLiteCommand(String.Format(@"ALTER TABLE {0} ADD COLUMN sig INTEGER", project.TableName), connection).ExecuteNonQuery();
             }
             catch (Exception) { }
         }

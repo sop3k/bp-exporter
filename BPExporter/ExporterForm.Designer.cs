@@ -44,6 +44,7 @@
             this.columnFile = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnBlock = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.bpIP = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.Sig = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.filesView = new BrightIdeasSoftware.ObjectListView();
             this.columnFilename = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.columnHashFiles = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -108,6 +109,7 @@
             this.regionCombo = new BPExporter.CheckedComboBox();
             this.ispCombo = new BPExporter.CheckedComboBox();
             this.countryCombo = new BPExporter.CheckedComboBox();
+            this.bpPort = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.hitsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.filesView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.projectsTree)).BeginInit();
@@ -130,6 +132,8 @@
             this.hitsView.AllColumns.Add(this.columnFile);
             this.hitsView.AllColumns.Add(this.columnBlock);
             this.hitsView.AllColumns.Add(this.bpIP);
+            this.hitsView.AllColumns.Add(this.Sig);
+            this.hitsView.AllColumns.Add(this.bpPort);
             this.hitsView.AlternateRowBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.hitsView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -149,7 +153,9 @@
             this.columnFileSize,
             this.columnFile,
             this.columnBlock,
-            this.bpIP});
+            this.bpIP,
+            this.Sig,
+            this.bpPort});
             this.hitsView.Cursor = System.Windows.Forms.Cursors.Default;
             this.hitsView.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.hitsView.Location = new System.Drawing.Point(16, 481);
@@ -241,6 +247,11 @@
             // 
             this.bpIP.AspectName = "BaseprotectIP";
             this.bpIP.Text = "BaseprotectIP";
+            // 
+            // Sig
+            // 
+            this.Sig.AspectName = "Sig";
+            this.Sig.Text = "Sig";
             // 
             // filesView
             // 
@@ -929,6 +940,11 @@
             this.countryCombo.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.countryCombo_ItemCheck);
             this.countryCombo.DropDownClosed += new System.EventHandler(this.countryCombo_DropDownClosed);
             // 
+            // bpPort
+            // 
+            this.bpPort.AspectName = "BaseprotectPort";
+            this.bpPort.Text = "BaseprotectPort";
+            // 
             // ExporterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1081,6 +1097,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox revLabel;
         private System.Windows.Forms.Label label12;
+        private BrightIdeasSoftware.OLVColumn Sig;
+        private BrightIdeasSoftware.OLVColumn bpPort;
     }
 }
 
