@@ -287,13 +287,13 @@ namespace BPExporter
                 city = reader.GetString(6);
 
                 downloaded = TypeUtils.GetFromReader<long>(reader, 18);
-                piece = TypeUtils.GetFromReader<int>(reader, 19);
+                piece = (int)TypeUtils.GetFromReader<long>(reader, 19);
                 piece_hash = TypeUtils.GetFromReader<String>(reader, 20);
 
                 our_ip = TypeUtils.GetFromReader<String>(reader, 21);
                 our_port = (int)TypeUtils.GetFromReader<long>(reader, 22);
 
-                block = TypeUtils.GetFromReader<int>(reader, 23);
+                block = (int)TypeUtils.GetFromReader<long>(reader, 23);
                 block_hash = TypeUtils.GetFromReader<String>(reader, 24);
 
                 sig = TypeUtils.GetFromReader<string>(reader, 25);
@@ -353,12 +353,12 @@ namespace BPExporter
             if (downloaded == 0)
                 downloaded = TypeUtils.GetFromReader<long>(reader, "block_size");
 
-            block = TypeUtils.GetFromReader<int>(reader, "block");
+            block = (int)TypeUtils.GetFromReader<long>(reader, "block");
             block_hash = TypeUtils.GetFromReader<String>(reader, "block_hash");
             if(String.IsNullOrEmpty(block_hash))
                 block_hash = TypeUtils.GetFromReader<String>(reader, "b_hash");
 
-            piece = TypeUtils.GetFromReader<int>(reader, "piece");
+            piece = (int)TypeUtils.GetFromReader<long>(reader, "piece");
             piece_hash = TypeUtils.GetFromReader<String>(reader, "piece_hash");
             if(String.IsNullOrEmpty(piece_hash))
                 piece_hash = TypeUtils.GetFromReader<String>(reader, "p_hash");
