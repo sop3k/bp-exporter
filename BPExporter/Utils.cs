@@ -366,7 +366,8 @@ namespace BPExporter
             foreach (String filename in files)
             {
                 progress.Invoke(filename, count++);
-                LaunchFixBat(String.Format(@"""{0}""", filename));
+                if(!DBUtils.IsDBOk(filename))
+                    LaunchFixBat(String.Format(@"""{0}""", filename));
             }
         }
 
@@ -391,53 +392,117 @@ namespace BPExporter
             return Directory.GetFiles(db_path, "*.db", SearchOption.AllDirectories);
         }
 
+        static public bool IsDBOk(String path)
+        {
+            string connStr = String.Format("Data Source={0};Version=3;", path);
+            var connection = new SQLiteConnection(connStr);
+            SQLiteCommand cmd = new SQLiteCommand();
+
+            try
+            {
+                connection.Open();
+                string Sql = @"SELECT count(*) FROM hits;";
+                cmd = new SQLiteCommand(Sql, connection);
+                return (long)cmd.ExecuteScalar() != 0;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+
+                cmd.Dispose();
+                connection.Dispose();
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
+        }
+
         static public bool IsExporterDB(String path)
         {
             string connStr = String.Format("Data Source={0};Version=3;", path);
             var connection = new SQLiteConnection(connStr);
-            connection.Open();
+            SQLiteCommand cmd = new SQLiteCommand();
 
-            string Sql = @"SELECT count(name) FROM sqlite_master WHERE type='table' AND name like 'hits_%';";
-            SQLiteCommand cmd = new SQLiteCommand(Sql, connection);
- 
-            return (long)cmd.ExecuteScalar()!=0;
+            try
+            {
+                connection.Open();
+
+                string Sql = @"SELECT count(name) FROM sqlite_master WHERE type='table' AND name like 'hits_%';";
+
+                cmd = new SQLiteCommand(Sql, connection);
+
+
+                return (long)cmd.ExecuteScalar() != 0;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+
+                cmd.Dispose();
+                connection.Dispose(); 
+
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
+            }
         }
 
         static public void UpdateIndexes(DB exporter, String path)
         {
             string connStr = String.Format("Data Source={0};Version=3;", path);
             var connection = new SQLiteConnection(connStr);
-            connection.Open();
-
-            string Sql = @"SELECT * from project";
-            SQLiteCommand cmd = new SQLiteCommand(Sql, connection);
-            SQLiteDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
+            try
             {
-                Project project = new Project(reader);
-                exporter.CreateNewProject(project);
-                
-                Sql = @"SELECT * from file_to_project join file on file.id=file_to_project.id_file where id_project={0}";
-                cmd = new SQLiteCommand(String.Format(Sql, reader["id"]), connection);
-                SQLiteDataReader ftp_reader = cmd.ExecuteReader();
-                List<Object[]> files = new List<Object[]>();
-                while (ftp_reader.Read())
+                connection.Open();
+
+                string Sql = @"SELECT * from project";
+                SQLiteCommand cmd = new SQLiteCommand(Sql, connection);
+                SQLiteDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    files.Add(new Object[2]{ftp_reader["filename"], ftp_reader["hash"]});
+                    Project project = new Project(reader);
+                    exporter.CreateNewProject(project);
+
+                    Sql = @"SELECT * from file_to_project join file on file.id=file_to_project.id_file where id_project={0}";
+                    cmd = new SQLiteCommand(String.Format(Sql, reader["id"]), connection);
+                    SQLiteDataReader ftp_reader = cmd.ExecuteReader();
+                    List<Object[]> files = new List<Object[]>();
+                    while (ftp_reader.Read())
+                    {
+                        files.Add(new Object[2] { ftp_reader["filename"], ftp_reader["hash"] });
+                    }
+
+                    exporter.AddFilesToProject(project, files);
+
+                    Sql = @"SELECT id, ip, port, date, guid, url, city, country, filename, type, client, hash, isp, timezone, bennkenn, time, region, size, block_size, piece_number, piece_hash, our_ip, our_port, block_number, block_hash from {0}";
+                    cmd = new SQLiteCommand(String.Format(Sql, project.TableName), connection);
+                    SQLiteDataReader hits_reader = cmd.ExecuteReader();
+                    List<Hit> hits = new List<Hit>();
+                    while (hits_reader.Read())
+                    {
+                        hits.Add(new Hit(hits_reader));
+                    }
+                    exporter.InsertHits(project, hits, project.FilesNo, new List<String>(), null);
+
                 }
 
-                exporter.AddFilesToProject(project, files);
+                cmd.Dispose();
+            }
+            finally
+            {
+                connection.Close();
+                connection.Dispose();
 
-                Sql = @"SELECT id, ip, port, date, guid, url, city, country, filename, type, client, hash, isp, timezone, bennkenn, time, region, size, block_size, piece_number, piece_hash, our_ip, our_port, block_number, block_hash from {0}";
-                cmd = new SQLiteCommand(String.Format(Sql, project.TableName), connection);
-                SQLiteDataReader hits_reader = cmd.ExecuteReader();
-                List<Hit> hits = new List<Hit>();
-                while (hits_reader.Read())
-                {
-                    hits.Add(new Hit(hits_reader));
-                }
-                exporter.InsertHits(project, hits, project.FilesNo, new List<String>(), null);
-            
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
             }
         }
     }

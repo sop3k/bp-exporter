@@ -412,7 +412,8 @@ namespace BPExporter
                     }
                 }
 
-                Callback.Invoke(Max, ++Counter);
+                if(++Counter % 20 == 0)
+                    Callback.Invoke(Max, Counter);
             }
         }
 

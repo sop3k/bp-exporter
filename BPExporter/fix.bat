@@ -5,17 +5,24 @@ echo Made by PROSOFT 2012 (soop3k@gmail.com)
 echo " "
 echo " "
 
-setlocal enabledelayedexpansion
-set INTEXTFILE=dumptmp.sql 
+set str=%1
+set input=%str:~1,-1%
 
-echo Opening database "%1" 
-echo .dump | sqlite3.exe "%1" > %INTEXTFILE%
+:GETTEMPNAME
+set TMPFILE="dump-%RANDOM%.tmp"
+if exist "%TMPFILE%" GOTO :GETTEMPNAME 
+
+setlocal enabledelayedexpansion
+set INTEXTFILE=%TMPFILE%
+
+echo Backup old database ...
+move "%input%" "%input%_backup"
+
+echo Dumping database "%input%_backup" %INTEXTFILE%
+echo .dump | sqlite3.exe "%input%_backup" > %INTEXTFILE%
 rbk_to_cmt.exe %INTEXTFILE%
 
-echo "Backup old database ..."
-move "%1" "%1_backup"
-
 echo "Saving fixed database ..."
-echo .read %INTEXTFILE% | sqlite3.exe "%1"
-
-;del %INTEXTFILE%
+echo .read %INTEXTFILE% | sqlite3.exe "%input%"
+del %INTEXTFILE%
+del "%input%_backup"

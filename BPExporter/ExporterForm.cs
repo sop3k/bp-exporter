@@ -183,6 +183,7 @@ namespace BPExporter
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.RestoreDirectory = true;
+
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 DisableLoad();
@@ -197,7 +198,6 @@ namespace BPExporter
                 }
                 else
                 {
-
                     DBUtils.Fix(new String[] { DbFilename }, ShowFixProgress(1));
 
                     HitsDBs = new List<DB>();
@@ -1123,7 +1123,7 @@ namespace BPExporter
                 }
             }
         }
-
+        
         private void bulkLoadBtn_Click(object sender, EventArgs e)
         {
             if(CurrentProject == null)
