@@ -50,7 +50,7 @@ Source: ".\O2003PIA.MSI";                       DestDir: {tmp}; Flags: deleteaft
 Source: ".\O2007PIA.MSI";                       DestDir: {tmp}; Flags: deleteafterinstall
 Source: ".\O2010PIA.MSI";                       DestDir: {tmp}; Flags: deleteafterinstall
 
-Source: ".\fix.bat";                            DestDir: {app};
+Source: "..\BPExporter\fix.bat";                            DestDir: {app};
 Source: ".\sqlite3.exe";                        DestDir: {app};
 Source: ".\rbk_to_cmt.exe";                     DestDir: {app};
 Source: ".\isxdl.dll";                          DestDir: {app};
