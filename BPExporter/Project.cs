@@ -298,9 +298,15 @@ namespace BPExporter
 
                 sig = TypeUtils.GetFromReader<string>(reader, 25);
 
-                var datestr = reader.GetString(3);                
-                date = DateTime.ParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss", 
-                    System.Globalization.CultureInfo.InvariantCulture);
+                var datestr = reader.GetString(3);
+                if (!DateTime.TryParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss",
+                    System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None,
+                    out date))
+                {
+                    date = DateTime.ParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss.fff",
+                        System.Globalization.CultureInfo.InvariantCulture);
+                }
+
                 time = date.TimeOfDay;
 
                 //time = reader.GetDateTime(15).TimeOfDay;
