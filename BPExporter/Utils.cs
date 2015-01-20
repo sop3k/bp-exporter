@@ -401,9 +401,10 @@ namespace BPExporter
             try
             {
                 connection.Open();
-                string Sql = @"SELECT count(*) FROM hits;";
+                string Sql = @"VACUUM";
                 cmd = new SQLiteCommand(Sql, connection);
-                return (long)cmd.ExecuteScalar() != 0;
+                cmd.ExecuteNonQuery();
+                return true;
             }
             catch
             {
