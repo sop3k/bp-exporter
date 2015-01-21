@@ -300,11 +300,13 @@ namespace BPExporter
 
                 var datestr = reader.GetString(3);
                 if (!DateTime.TryParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss",
-                    System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None,
-                    out date))
+                    System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
                 {
-                    date = DateTime.ParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss.fff",
-                        System.Globalization.CultureInfo.InvariantCulture);
+                    if(!DateTime.TryParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss.fff",
+                        System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out date))
+                    {
+                        date = DateTime.ParseExact(datestr.TrimEnd('Z'), "yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    }
                 }
 
                 time = date.TimeOfDay;
