@@ -407,6 +407,8 @@ namespace BPExporter
                 int second = (int)TypeUtils.GetFromReader<long>(reader, "second");
 
                 int msecond = (int)TypeUtils.GetFromReader<long>(reader, "msecond");
+                if (msecond < 0 || msecond > 999)
+                    msecond = 0;
                 date = new DateTime(year, month, day, hour, minute, second, msecond);
             }
 
